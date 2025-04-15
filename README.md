@@ -1,6 +1,6 @@
 # warehouse
 
-We chose to create a Handling warehouses (Vanderlande) management system to manage inventory. The system efficiently tracks and updates inventory levels in real time by interacting with a central database. The system will streamline receiving, storing, and dispatching products within a warehouse.
+We chose to create a Handling warehouse (Vanderlande) management system to manage inventory. The system efficiently tracks and updates inventory levels in real time by interacting with a central database. The system will streamline receiving, storing, and dispatching products within a warehouse.
 
 ## Core Functionalities
 
