@@ -2,10 +2,14 @@ import dotnev from 'dotenv';
 
 dotnev.config();
 
+export const isDev = process.env.NODE_ENV !== "production";
+
 export const config = {
-  URL: process.env.URL,
   PORT: process.env.PORT,
   NODE_ENV: process.env.NODE_ENV,
+  URL:  isDev ? process.env.PROD_URL : process.env.DEV_URL,
+  BACKEND_URL: isDev ? process.env.PROD_BACKEND_URL : process.env.DEV_BACKEND_URL,
+  
   MONGODB_LOCAL_URL: process.env.MONGODB_LOCAL_URL,
   MONGODB_CLOUD_URL: process.env.MONGODB_CLOUD_URL,
 
@@ -17,13 +21,16 @@ export const config = {
   EMAIL_CONFIG_USER: process.env.OTP_EMAIL,
   EMAIL_CONFIG_PASS: process.env.OTP_EMAIL_PASSWORD,
 
+  SMTP_HOST: process.env.SMTP_HOST,
+  SMTP_PORT: process.env.SMTP_PORT,
+
   JWT_SECRET: process.env.JWT_SECRET,
   JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET,
   JWT_EXPIRATION: process.env.JWT_EXPIRATION,
-  ENCRYPTION_SECRET: process.env.ENCYPTION_SECRET,
+  ENCRYPTION_SECRET: process.env.ENCRYPTION_SECRET,
 
-  TIME_ZONE: process.env.TIME_ZONE,
-  LOCALE: process.env.LOCALE,
+  TIME_ZONE: process.env.TIME_ZONE || 'Europe/Amsterdam',
+  LOCALE: process.env.LOCALE || 'en-US',
 
   emailConfig: {
     service: process.env.OTP_EMAIL_SERVICE,
@@ -33,3 +40,4 @@ export const config = {
     }
   }
 };
+

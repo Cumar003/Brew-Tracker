@@ -33,14 +33,6 @@ eventBus.on(USER_EVENTS.REGISTERED, ({ req, user }: ListenerProps) => {
     LoggerUtils.logUserEvent("Password Changed", user, req);
   });
   
-  eventBus.on(USER_EVENTS.EMAIL_VERIFIED, ({ req, user }: ListenerProps) => {
-    LoggerUtils.logUserEvent("Email Verified", user, req);
-  });
-  
-  eventBus.on(USER_EVENTS.EMAIL_VERIFICATION_REQUESTED, ({ req, user }: ListenerProps) => {
-    LoggerUtils.logUserEvent("Email Verification Requested", user, req);
-  });
-  
   eventBus.on(USER_EVENTS.PROFILE_UPDATED, ({ req, user }: ListenerProps) => {
     LoggerUtils.logUserEvent("Profile Updated", user, req);
   });
@@ -49,10 +41,3 @@ eventBus.on(USER_EVENTS.REGISTERED, ({ req, user }: ListenerProps) => {
     LoggerUtils.logUserEvent("User Deleted", user, req);
   });
   
-  eventBus.on(USER_EVENTS.APPOINTMENT_BOOKED, ({ req, user }: ListenerProps) => {
-    LoggerUtils.logUserEvent("Appointment Booked", user, req);
-  });
-  
-  eventBus.on(USER_EVENTS.APPOINTMENT_CANCELLED, ({ req, user }: ListenerProps) => {
-    LoggerUtils.logUserEvent("Appointment Cancelled", user, req);
-  });

@@ -9,18 +9,22 @@ enum UserRole {
 interface IUser extends Document {
   _id: mongoose.ObjectId,
   email: string;
+  name: string;
   username: string;
   password: string;
   role: UserRole;
+  rfid: number;
   matchPassword: (enteredPassword: string) => Promise<boolean>;
-  otp?: string;
-  otpExpiry?: number;
-  emailVerified: boolean;
+  imageUrl: string;
   resetToken?: string;
   resetTokenExpires?: number;
 }
 
 const userSchema = new Schema<IUser>({
+  name: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
@@ -36,32 +40,29 @@ const userSchema = new Schema<IUser>({
   role: {
     type: String,
     required: true,
-    enum: Object.values(UserRole), 
-    default: UserRole.User,       
+    enum: Object.values(UserRole),
+    default: UserRole.User,
+  },
+  rfid: {
+    type: Number,
+    required: true,
+  },
+  imageUrl: {
+    type: String,
+    required: true,
   },
   password: {
     type: String,
     required: true,
   },
-  otp: {
-    type: String,
-  },
-  otpExpiry: {
-    type: Number,
-  },
-  emailVerified: {
-    type: Boolean,
-    default: false,
-  },
-  resetToken: { 
+  resetToken: {
     type: String,
   },
   resetTokenExpires: {
     type: Number,
   },
-}, {
-  timestamps: true,
-});
+}, { timestamps: true });
+
 
 userSchema.set('toJSON', {
   transform: (doc, ret) => {
@@ -81,12 +82,6 @@ userSchema.methods.matchPassword = async function (enteredPassword: string): Pro
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-// set up a pipeline
-// set up a not local db
-// encrypt the jwt
-// inside -> standart application security testing 
-
-
 userSchema.methods.isResetTokenExpired = function (): boolean {
   if (this.resetTokenExpires && Date.now() > this.resetTokenExpires) {
     return true;
@@ -94,12 +89,6 @@ userSchema.methods.isResetTokenExpired = function (): boolean {
   return false;
 };
 
-userSchema.methods.isOtpExpired = function (): boolean {
-  if (this.otpExpiry && Date.now() > this.otpExpiry) {
-    return true;
-  }
-  return false;
-};
 
 const User = mongoose.model<IUser>('User', userSchema);
 

@@ -9,11 +9,7 @@ export const USER_EVENTS = {
   PASSWORD_CHANGED: "user.password_changed",
 
   EMAIL_VERIFIED: "user.email_verified",
-  EMAIL_VERIFICATION_REQUESTED: "user.email_verification_requested",
 
   PROFILE_UPDATED: "user.profile_updated",
   USER_DELETED: "user.deleted",
-
-  APPOINTMENT_BOOKED: "user.appointment_booked",
-  APPOINTMENT_CANCELLED: "user.appointment_cancelled",
 };
