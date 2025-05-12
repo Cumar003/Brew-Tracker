@@ -49,6 +49,7 @@ const userSchema = new Schema<IUser>({
   },
   imageUrl: {
     type: String,
+    default: 'https://upload.wikimedia.org/wikipedia/commons/2/2c/Default_pfp.svg',
     required: true,
   },
   password: {

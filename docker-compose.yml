@@ -1,0 +1,51 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+      target: development 
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/client
+      - /client/node_modules
+    environment:
+      - NODE_ENV=development
+      - HOST=0.0.0.0
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./server/src:/usr/src/app/src
+      - ./server/.env:/usr/src/app/.env
+    depends_on:
+      - mongo
+    environment:
+      - NODE_ENV=development
+      - MONGODB_LOCAL_URL=mongodb://mongo:27017/brew-tracker
+      - PORT=3000
+    env_file:
+      - ./server/.env
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=brew-tracker
+      - MONGO_INITDB_ROOT_PASSWORD=4LaO5zdg6HJpI2uU
+
+volumes:
+  mongo-data:
