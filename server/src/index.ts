@@ -1,5 +1,3 @@
-import "./events";
-
 import cors from "cors";
 import helmet from "helmet";
 import dotenv from "dotenv";

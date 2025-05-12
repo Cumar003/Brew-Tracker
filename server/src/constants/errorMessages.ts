@@ -13,26 +13,6 @@ export const ERROR_MESSAGES = {
     userFriendlyMessage:
       "Your email or password is incorrect. Try again or reset your password.",
   },
-  OTP_EXPIRED: {
-    message: "The OTP has expired. Please request a new one.",
-    statusCode: 400,
-    errorCode: "AUTH_003",
-    userFriendlyMessage:
-      "Your OTP is no longer valid. Please request a new one.",
-  },
-  OTP_NOT_FOUND: {
-    message: "OTP not found. Please check your inbox or request a new one.",
-    statusCode: 404,
-    errorCode: "AUTH_004",
-    userFriendlyMessage:
-      "We couldn't find your OTP. Check your inbox or request a new one.",
-  },
-  INVALID_OTP: {
-    message: "Invalid OTP. Please try again.",
-    statusCode: 400,
-    errorCode: "AUTH_005",
-    userFriendlyMessage: "The OTP entered is incorrect. Please try again.",
-  },
   EMAIL_EXISTS: {
     message: "This email is already registered.",
     statusCode: 409,
@@ -47,24 +27,18 @@ export const ERROR_MESSAGES = {
     userFriendlyMessage:
       "That username is already in use. Please choose a different one.",
   },
-  EMAIL_NOT_VERIFIED: {
-    message: "Email verification required.",
-    statusCode: 403,
-    errorCode: "AUTH_006",
-    userFriendlyMessage: "Please verify your email before proceeding.",
-  },
-  EMAIL_ALREADY_VERIFIED: {
-    message: "Email is already verified.",
-    statusCode: 409,
-    errorCode: "AUTH_007",
-    userFriendlyMessage:
-      "Your email has already been verified. You can log in now.",
-  },
   SERVER_ERROR: {
     message: "An internal server error occurred.",
     statusCode: 500,
     errorCode: "SERVER_001",
     userFriendlyMessage: "Something went wrong. Please try again later.",
+  },
+  TEMPLATE_READ_ERROR: {
+    message: "Error reading email template.",
+    statusCode: 500,
+    errorCode: "EMAIL_002",
+    userFriendlyMessage:
+      "We encountered an issue with the email template. Please try again later.",
   },
   DB_CONNECTION_FAILED: {
     message: "Database connection failed.",
@@ -85,19 +59,6 @@ export const ERROR_MESSAGES = {
     statusCode: 500,
     errorCode: "DB_003",
     userFriendlyMessage: "An error occurred.",
-  },
-  EMAIL_SENDING_FAILED: {
-    message: "Failed to send email.",
-    statusCode: 500,
-    errorCode: "EMAIL_001",
-    userFriendlyMessage: "Unable to send the email. Please try again later.",
-  },
-  TEMPLATE_READ_ERROR: {
-    message: "Error reading email template.",
-    statusCode: 500,
-    errorCode: "EMAIL_002",
-    userFriendlyMessage:
-      "We encountered an issue with the email template. Please try again later.",
   },
   JWT_TOKEN_MISSING: {
     message: "Authorization token missing.",

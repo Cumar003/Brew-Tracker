@@ -21,13 +21,16 @@ export class AuthRepository {
   public async createUser(
     email: string,
     username: string,
-    password: string
+    password: string,
+    rfid: number,
+    name: string
   ): Promise<IUser> {
     try {
-      const newUser = new User({ email, username, password });
+      const newUser = new User({ email, username, password, rfid, name });
       await newUser.save();
       return newUser;
     } catch (error) {
+      console.log(error)
       throw createError("DB_QUERY_FAILED");
     }
   }
