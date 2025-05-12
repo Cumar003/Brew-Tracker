@@ -6,14 +6,14 @@ export class AuthController {
   private authService = new AuthService();
 
   public async register(req: Request, res: Response, next: NextFunction) {
-    const { email, username, password } = req.body;
+    const { email, username, password, rfid, name } = req.body;
     try {
-      await this.authService.registerUser(req, email, username, password);
+      await this.authService.registerUser(email, username, password, rfid, name);
 
       res.status(201).json({
         success: true,
         message:
-          "User registered successfully. Please check your email for OTP.",
+          "User registered successfully.",
       });
     } catch (error) {
       next(error);

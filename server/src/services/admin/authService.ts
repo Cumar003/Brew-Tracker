@@ -5,9 +5,7 @@ import { Request } from "express";
 import { IUser } from "../../models/user";
 import { config } from "../../config/config";
 import { JwtUtils } from "../../utils/jwtUtils";
-import { eventBus } from "../../events/EventBus";
 import { EmailUtils } from "../../utils/emailUtils";
-import { USER_EVENTS } from "../../events/user.events";
 import { createError } from "../../middleware/errorHandler";
 import { UserRepository } from "../../repositories/userRepository";
 import { AuthRepository } from "../../repositories/admin/authRepository";
@@ -16,15 +14,11 @@ export class AuthService {
   private authRepository = new AuthRepository();
   private userRepository = new UserRepository();
 
-  public async registerUser(req: Request, email: string, username: string, password: string) {
+  public async registerUser(email: string, username: string, password: string, rfid: number, name: string) {
     try {
       const existingUser = await this.userRepository.findByEmail(email);
   
       if (existingUser) {
-        if (!existingUser.emailVerified) {
-          throw createError("EMAIL_EXISTS", { otpRedirect: true });
-        }
-  
         throw createError("EMAIL_EXISTS");
       }
   
@@ -36,10 +30,10 @@ export class AuthService {
       const newUser = await this.authRepository.createUser(
         email,
         username,
-        password
+        password,
+        rfid,
+        name
       );
-
-      eventBus.emit(USER_EVENTS.REGISTERED, { user: newUser, req });
   
       return newUser;
     } catch (error) {
@@ -60,10 +54,6 @@ export class AuthService {
         throw createError("INVALID_CREDENTIALS");
       }
 
-      if (!user.emailVerified) {
-        throw createError("EMAIL_NOT_VERIFIED");
-      }
-
       const token = JwtUtils.generateToken(
         user._id.toString(),
         user.username,
@@ -71,8 +61,6 @@ export class AuthService {
         rememberMe
       );
       const refreshToken = JwtUtils.generateRefreshToken(user._id.toString());
-
-      eventBus.emit(USER_EVENTS.LOGGED_IN, { user, req });
 
       return { user, token, refreshToken };
     } catch (error) {

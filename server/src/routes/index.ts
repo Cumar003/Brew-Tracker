@@ -8,3 +8,4 @@ router.use('/api/auth', publicAuthRoutes);
 router.use('/api/auth', protectedAuthRoutes); // Protected routes (JWT required)
 
 export { router };
+    
