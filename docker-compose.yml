@@ -1,5 +1,3 @@
-version: "3.8"
-
 services:
   frontend:
     build:
@@ -32,10 +30,9 @@ services:
       - mongo
     environment:
       - NODE_ENV=development
-      - MONGODB_LOCAL_URL=mongodb://mongo:27017/brew-tracker
+      - MONGODB_LOCAL_URL=mongodb://brew-tracker:4LaO5zdg6HJpI2uU@mongo:27017/brew-tracker?authSource=admin
       - PORT=3000
-    env_file:
-      - ./server/.env
+      
   mongo:
     image: mongo:latest
     container_name: mongo

@@ -1,18 +1,20 @@
-# Warehouse
+# TODO:
 
-We chose to create a Handling warehouse (Vanderlande) management system to manage inventory. The system efficiently tracks and updates inventory levels in real time by interacting with a central database. The system will streamline receiving, storing, and dispatching products within a warehouse.
+Modify README
 
-## Core Functionalities
+# Local Development Testing with Docker
 
-### **Inventory Retrieval**
+This project can be run locally using Docker Compose. Make sure you have Docker Desktop installed and running on your machine.
 
-- The system must be able to fetch current inventory data from the database.
-- Users can search or filter inventory by product ID, name, category, location, or stock level
-- Data must be displayed in a user-friendly dashboard/interface (web or desktop)
+**Note:** The first time you run `docker compose up`, it will take some time to build the images and download dependencies.
 
-### **Inventory Update**
+## Docker Compose Commands
 
-The system must support real-time updates to inventory due to:
+Here is a summary of useful Docker Compose commands:
 
-- Receiving new stock
-- Dispatching/shipping items
+- `docker compose up`: Builds and starts the containers for the project.
+- `docker compose up <service_name>`: Starts only a specific service and its dependencies. Useful for working on individual parts of the application (e.g., `docker compose up client`).
+- `docker compose up --build`: Forces a rebuild of the images before starting the containers. Useful when you've changed code or dependencies.
+- `docker compose down`: Stops and removes the containers, networks, and volumes created by `up`.
+- `docker compose logs <service_name>`: Displays the logs for a specific service (e.g., `docker compose logs server`, `docker compose logs client`). You can add `-f` to follow the logs in real time.
+- `docker compose exec <service_name> <command>`: Executes a command inside a running service container (e.g., `docker compose exec server sh` to open a shell in the server container).
