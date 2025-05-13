@@ -5,8 +5,8 @@ import { createError } from "../middleware/errorHandler";
 
 export async function db() {
 
-  const connectionStrng = isDev ? config.MONGODB_CLOUD_URL : config.MONGODB_LOCAL_URL;  
-
+  const connectionStrng = isDev ? config.MONGODB_LOCAL_URL : config.MONGODB_CLOUD_URL;
+ 
   try {
     await mongoose.connect(connectionStrng as string);
     console.info("Database successfully connected");
