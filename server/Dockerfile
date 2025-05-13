@@ -19,7 +19,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 COPY --from=builder /usr/src/app/node_modules ./node_modules
 COPY --from=builder /usr/src/app/build ./build
-COPY .env ./
+# COPY .env ./
 
 EXPOSE 3000
 CMD ["node", "build/index.js"]
