@@ -9,7 +9,7 @@ import { AdminGuard, RootGuard } from "./components/guards/index";
 import Otp from "./routes/(auth)/Otp";
 import Login from "./routes/(auth)/Login";
 
-import { ShoppingList, Dashboard, StockManagement, Usermanagement } from "./routes/(root)";
+import { ShoppingList, Dashboard, StockManagement, Usermanagement, Stock } from "./routes/(root)";
 
 
 const App = () => {
@@ -21,8 +21,10 @@ const App = () => {
 
       {/* Protected Root Routes */}
       <Route element={<RootGuard />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/shopping-list" element={<ShoppingList />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/shopping-list" element={<ShoppingList />} />
+      <Route path="/stock" element={<Stock />} />
+      <Route path="/shopping-list" element={<ShoppingList />} />
 
         {/* Admin Routes (nested inside RootGuard) */}
         <Route element={<AdminGuard />}>

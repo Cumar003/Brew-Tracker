@@ -1,21 +1,14 @@
 "use client"
 
-import { ChevronRight, type LucideIcon } from "lucide-react"
+import { type LucideIcon } from "lucide-react"
+import { Link, useLocation } from "react-router-dom"
 
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible"
 import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
+  SidebarMenuButton,
 } from "@/components/ui/sidebar"
 
 export function NavMain({
@@ -25,49 +18,50 @@ export function NavMain({
     title: string
     url: string
     icon?: LucideIcon
-    isActive?: boolean
-    items?: {
-      title: string
-      url: string
-    }[]
   }[]
 }) {
-  return (
+  const location = useLocation()
+
+  // Split items into platform and admin sections
+  const platformItems = items.filter(
+    (item) =>
+      item.title !== "User Management" &&
+      item.title !== "Stock Management"
+  )
+
+  const adminItems = items.filter(
+    (item) =>
+      item.title === "User Management" ||
+      item.title === "Stock Management"
+  )
+
+  const renderGroup = (label: string, groupItems: typeof items) => (
     <SidebarGroup>
-      <SidebarGroupLabel>Platform</SidebarGroupLabel>
+      <SidebarGroupLabel>{label}</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) => (
-          <Collapsible
-            key={item.title}
-            asChild
-            defaultOpen={item.isActive}
-            className="group/collapsible"
-          >
-            <SidebarMenuItem>
-              <CollapsibleTrigger asChild>
-                <SidebarMenuButton tooltip={item.title}>
-                  {item.icon && <item.icon />}
+        {groupItems.map((item) => {
+          const Icon = item.icon
+          const isActive = location.pathname === item.url
+
+          return (
+            <SidebarMenuItem key={item.title} className={isActive ? "active" : ""}>
+              <SidebarMenuButton asChild tooltip={item.title}>
+                <Link to={item.url} className="flex items-center gap-2">
+                  {Icon && <Icon className="h-4 w-4" />}
                   <span>{item.title}</span>
-                  <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <SidebarMenuSub>
-                  {item.items?.map((subItem) => (
-                    <SidebarMenuSubItem key={subItem.title}>
-                      <SidebarMenuSubButton asChild>
-                        <a href={subItem.url}>
-                          <span>{subItem.title}</span>
-                        </a>
-                      </SidebarMenuSubButton>
-                    </SidebarMenuSubItem>
-                  ))}
-                </SidebarMenuSub>
-              </CollapsibleContent>
+                </Link>
+              </SidebarMenuButton>
             </SidebarMenuItem>
-          </Collapsible>
-        ))}
+          )
+        })}
       </SidebarMenu>
     </SidebarGroup>
+  )
+
+  return (
+    <>
+      {renderGroup("Platform", platformItems)}
+      {adminItems.length > 0 && renderGroup("Admin", adminItems)}
+    </>
   )
 }

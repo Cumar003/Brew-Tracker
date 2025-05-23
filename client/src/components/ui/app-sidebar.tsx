@@ -10,8 +10,6 @@ import {
   GalleryVerticalEnd,
   Map,
   PieChart,
-  Settings2,
-  SquareTerminal,
 } from "lucide-react"
 
 import { NavMain } from "@/components/ui/nav-main"
@@ -24,7 +22,6 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import { TeamSwitcher } from "./nav-switcher"
-import { NavProjects } from "./nav-project"
 
 // This is sample data.
 const data = {
@@ -42,65 +39,33 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
-      url: "#",
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: "History",
-          url: "#",
-        },
-        {
-          title: "Starred",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: PieChart,
     },
     {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
-          url: "#",
-        },
-      ],
+      title: "Shopping List",
+      url: "/shopping-list",
+      icon: BookOpen,
     },
     {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Account",
-          url: "#",
-        },
-        {
-          title: "Settings",
-          url: "#",
-        },
-      ],
+      title: "Stock",
+      url: "/stock",
+      icon: Frame,
+    },
+    {
+      title: "User Management",
+      url: "/admin/user-management",
+      icon: Command,
+    },
+    {
+      title: "Stock Management",
+      url: "/admin/stock-management",
+      icon: Map,
     },
   ],
 }
+
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (

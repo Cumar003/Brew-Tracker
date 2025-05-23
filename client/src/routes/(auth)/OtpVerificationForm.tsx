@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Link } from "react-router-dom"
 
 export function OtpVerificationForm({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
   const [otp, setOtp] = useState<string[]>(Array(6).fill(""))
@@ -128,9 +129,11 @@ export function OtpVerificationForm({ className, ...props }: React.ComponentProp
                   )}
                 </div>
               </div>
+              <Link to={'/dashboard'}>
               <Button type="submit" className="w-full" disabled={otp.some((digit) => digit === "")}>
                 Verify
               </Button>
+              </Link>
             </div>
           </form>
         </CardContent>
