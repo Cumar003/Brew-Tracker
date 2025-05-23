@@ -6,7 +6,9 @@ import { Routes, Route } from "react-router-dom";
 import { AdminGuard, RootGuard } from "./components/guards/index";
 
 //importing the pages for the app.
+import Otp from "./routes/(auth)/Otp";
 import Login from "./routes/(auth)/Login";
+
 import { ShoppingList, Dashboard, StockManagement, Usermanagement } from "./routes/(root)";
 
 
@@ -15,6 +17,7 @@ const App = () => {
     <Routes>
       {/* Public Routes */}
       <Route path="/" element={<Login />} />
+      <Route path="/verify-email" element={<Otp />} />
 
       {/* Protected Root Routes */}
       <Route element={<RootGuard />}>

@@ -1,7 +1,12 @@
 import { Outlet } from "react-router-dom";
+import { AuthLayout } from "../layouts";
 
 const RootGuard = () => {
-  return <Outlet />;
+  return (
+    <AuthLayout>
+      <Outlet />
+    </AuthLayout>
+  );
 };
 
 export default RootGuard;

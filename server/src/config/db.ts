@@ -4,8 +4,9 @@ import { config, isDev } from "./config";
 import { createError } from "../middleware/errorHandler";
 
 export async function db() {
+  const connectionStrng = config.MONGODB_CLOUD_URL;
 
-  const connectionStrng = isDev ? config.MONGODB_LOCAL_URL : config.MONGODB_CLOUD_URL;
+  // = isDev ? config.MONGODB_LOCAL_URL :
  
   try {
     await mongoose.connect(connectionStrng as string);
